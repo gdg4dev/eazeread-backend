@@ -16,10 +16,9 @@ app.post('/api/simplify/text', async (req, res) => {
   await getGPTResponse(0, text).then(async d => {
     res.json({ message: "Success", content: await d });
   })
-  // You can process the 'text' here as needed
 });
 
-// API to fetch JSON response from a URL
+// API to fetch JSON response from a URL - just in case~
 app.post('/api/simplify/url', (req, res) => {
   const { url } = req.body;
   if (!url) {
@@ -40,19 +39,19 @@ app.post('/api/simplify/url', (req, res) => {
     console.error('Error:', error);
   });
 
-  
+
   // You can make an HTTP request to the 'url' and process the response
   res.json({ message: "Data fetched successfully from the URL.", url: url });
 });
 
 // modifies the text to even 5 year old can understandd 
 app.post('/api/modify/text', (req, res) => {
-  const { removeText } = req.body;
-  if (!removeText) {
-    return res.status(400).json({ error: "Text to remove is required." });
+  const { text } = req.body;
+  if (!text) {
+    return res.status(400).json({ error: "Text is required." });
   }
   // Simulate removing text from the existing resource
-  existingText = existingText.replace(removeText, '');
+  existingText = existingText.replace(text, '');
   res.json({ message: "Text removed successfully.", updatedText: existingText });
 });
 
