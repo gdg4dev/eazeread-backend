@@ -4,6 +4,8 @@ const { getGPTResponse } = require('./utils/openai');
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(cors())
+app.options('*', cors())
+app.post('*', cors())
 app.use(express.json());
 const axios = require('axios');
 const cheerio = require('cheerio');
