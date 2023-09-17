@@ -5,7 +5,7 @@ const openai = new OpenAI({
   });
 
 const prompts = {
-    "0": "You will be provvided with the large text content. You have to sumarize the main point or steps or process from the article. Don't make the sumarry too small.  Don't mention pr show affirmatively or expressionism or anything, just provide the content. ",
+    "0": "You will be provvided with the large text content. You have to sumarize the main points or steps or process from the article. Don't make the sumarry too small.  Don't mention pr show affirmatively or expressionism or anything, just provide the content. ",
     "1": "You will be provided with the large text content. You will have to modify it and explain it like I'm 5 year old. Meaning you should remove buzzwords, remove unnecessary information, simlpify complex explanation if there are any, use very simple analogies to explain things if it's too complex. don't care too much about the lenghh of the response, but try to keep the length low. Don't mention pr show affirmatively or expressionism or anything, just provide the content."
 }   
 
