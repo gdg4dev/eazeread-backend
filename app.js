@@ -17,6 +17,9 @@ app.post('/api/simplify/text', async (req, res) => {
     return res.status(400).json({ error: "Text is required." });
   }
   await getGPTResponse(0, text).then(async d => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
     res.json({ message: "Success", content: await d });
   })
 });
@@ -34,17 +37,16 @@ app.post('/api/simplify/url', (req, res) => {
     const $ = cheerio.load(htmlData);
     textData =  $('body').text()
     await getGPTResponse(0, textData).then(async d => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
         res.json({ message: "Success", content: await d });
       })
   })
   .catch((error) => {
     // Handle any errors
     console.error('Error:', error);
-  });
-
-
-  // You can make an HTTP request to the 'url' and process the response
-  res.json({ message: "Data fetched successfully from the URL.", url: url });
+  })
 });
 
 // modifies the text to even 5 year old can understandd 
@@ -54,6 +56,9 @@ app.post('/api/modify/text', async (req, res) => {
     return res.status(400).json({ error: "Text is required." });
   }
   await getGPTResponse(1, text).then(async d => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
     res.json({ message: "Success", content: await d });
   })
 });
