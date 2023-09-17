@@ -45,12 +45,14 @@ app.post('/api/simplify/url', (req, res) => {
 });
 
 // modifies the text to even 5 year old can understandd 
-app.post('/api/modify/text', (req, res) => {
+app.post('/api/modify/text', async (req, res) => {
   const { text } = req.body;
   if (!text) {
     return res.status(400).json({ error: "Text is required." });
   }
-  res.json({ message: "Text removed successfully.", updatedText: existingText });
+  await getGPTResponse(1, text).then(async d => {
+    res.json({ message: "Success", content: await d });
+  })
 });
 
 app.listen(port, () => {
