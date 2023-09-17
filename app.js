@@ -3,6 +3,7 @@ const express = require('express');
 const { getGPTResponse } = require('./utils/openai');
 const app = express();
 const port = process.env.PORT || 3000;
+const cors = require('cors')
 app.use(cors())
 app.options('*', cors())
 app.post('*', cors())
@@ -17,9 +18,6 @@ app.post('/api/simplify/text', async (req, res) => {
     return res.status(400).json({ error: "Text is required." });
   }
   await getGPTResponse(0, text).then(async d => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
     res.json({ message: "Success", content: await d });
   })
 });
@@ -37,9 +35,6 @@ app.post('/api/simplify/url', (req, res) => {
     const $ = cheerio.load(htmlData);
     textData =  $('body').text()
     await getGPTResponse(0, textData).then(async d => {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
         res.json({ message: "Success", content: await d });
       })
   })
@@ -56,9 +51,6 @@ app.post('/api/modify/text', async (req, res) => {
     return res.status(400).json({ error: "Text is required." });
   }
   await getGPTResponse(1, text).then(async d => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
     res.json({ message: "Success", content: await d });
   })
 });
