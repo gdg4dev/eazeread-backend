@@ -23,7 +23,7 @@ const getGPTResponse = async (type, content) => {
           }
         ],
         temperature: 0.02,
-        max_tokens: 2500,
+        max_tokens: 1250,
         top_p: 1,
         frequency_penalty: 0.2,
         presence_penalty: 0.01,
