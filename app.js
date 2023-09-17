@@ -50,8 +50,6 @@ app.post('/api/modify/text', (req, res) => {
   if (!text) {
     return res.status(400).json({ error: "Text is required." });
   }
-  // Simulate removing text from the existing resource
-  existingText = existingText.replace(text, '');
   res.json({ message: "Text removed successfully.", updatedText: existingText });
 });
 
